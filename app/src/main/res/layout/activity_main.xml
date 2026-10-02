@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="#0b0b0f">
+
+    <!-- 左侧：电视剧频道列表 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/seriesList"
+        android:layout_width="360dp"
+        android:layout_height="match_parent"
+        android:background="#14141c"
+        android:padding="10dp"
+        android:focusable="true" />
+
+    <!-- 右侧：播放器 + 直播信息浮层 -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="28dp"
+            android:background="@drawable/overlay_bg">
+
+            <TextView
+                android:id="@+id/seriesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="电视剧" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="● LIVE"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#ff3b30" />
+
+                <TextView
+                    android:id="@+id/liveInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textSize="22sp"
+                    android:textColor="#ffe9b0"
+                    android:text="第 1 集 · 00:00" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/episodeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="18sp"
+                android:textColor="#c9cdd6"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
