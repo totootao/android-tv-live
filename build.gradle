@@ -1,0 +1,5 @@
+// 顶层构建脚本：Android Gradle Plugin 的版本在 app/build.gradle 中声明，
+// 仓库解析由 settings.gradle 的 pluginManagement / dependencyResolutionManagement 提供。
+plugins {
+    // 此处留空，子模块各自声明所需插件
+}
