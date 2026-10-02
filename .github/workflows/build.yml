@@ -22,23 +22,19 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Android SDK (cmdline-tools)
-        run: |
-          cd "$HOME"
-          curl -sL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdtools.zip
-          mkdir -p android-sdk/cmdline-tools
-          unzip -q cmdtools.zip -d android-sdk/cmdline-tools
-          mv android-sdk/cmdline-tools/cmdline-tools android-sdk/cmdline-tools/latest
-          echo "ANDROID_HOME=$HOME/android-sdk" >> "$GITHUB_ENV"
-          echo "$HOME/android-sdk/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3.2.2
 
-      - name: Accept licenses & install SDK packages
+      - name: Install SDK packages & accept licenses
         run: |
+          SDK="${ANDROID_HOME:-$ANDROID_SDK_ROOT}"
+          SM=$(ls "$SDK"/cmdline-tools/*/bin/sdkmanager 2>/dev/null | head -1)
+          export PATH="$PATH:$(dirname "$SM")"
           yes | sdkmanager --licenses
           sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
       - name: Point Gradle to the SDK
-        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
+        run: echo "sdk.dir=${ANDROID_HOME:-$ANDROID_SDK_ROOT}" > local.properties
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
